@@ -1,0 +1,137 @@
+---
+title: "Workshop I 'Actuarial Science'"
+author: "Amir_TALEBI"
+date: "2023-12-10"
+output: html_document
+---
+
+```{r}
+library(tidyverse) 
+library(dplyr)
+library(ggplot2)
+
+```
+
+```{r}
+insurance <- read.csv("/home/amir/Documents/3rd_semester/workshop I/project/project_R/insurance.csv", header = TRUE)
+insurance
+```
+
+```{r}
+summary(insurance[c('age', 'bmi', 'children', 'charges')])
+```
+
+```{r}
+sapply(insurance, class)
+```
+
+```{r}
+# to check for the outliers
+
+for (i in 1:ncol(insurance)) {
+  if (is.numeric(insurance[, i])) {
+    boxplot(insurance[, i], outcol="Red", main=colnames(insurance)[i])
+  }
+}
+
+```
+
+```{r}
+# to check for null values per column
+
+colSums(is.na(insurance))
+```
+No null value. 
+
+```{r}
+
+sum(duplicated(insurance))
+
+```
+
+# so, there is one duplicated row in data frame. we remove it. 
+
+```{r}
+
+insurance <- unique(insurance)
+insurance
+```
+
+```{r}
+
+ggplot(insurance, aes(x = charges)) +
+  geom_histogram(binwidth = 1500, fill = 'lightgreen', color = 'black') +
+  labs(title='charges distribution', x = 'charges') +
+  theme_minimal()
+
+```
+# long tail and as a result we have  outliers here.
+
+```{r}
+
+hist(insurance$age, main='Age distribution', xlab='Age', col='lightblue', border='black', breaks=15  , prob=TRUE)
+lines(density(insurance$age), col = 'red')
+
+```
+# for the Age, that would be better if we had more data for the ages more than 50. Majority of records are from younger people. 
+
+```{r}
+
+insurance$sex <- as.factor(insurance$sex)
+
+ggplot(insurance, aes(x=sex, fill=sex, group=sex)) +
+  geom_bar() +
+  theme_minimal() +
+  scale_fill_manual(values=c('cyan', 'brown'))
+
+```
+
+```{r}
+
+hist(insurance$bmi, main='BMI distribution', xlab='BMI', col='lightgreen', border='black', breaks=15 , prob=TRUE)
+lines(density(insurance$bmi), col = 'red')
+
+```
+# BMI plot shows a gaussian distribution.
+
+```{r}
+
+ggplot(insurance, aes(x=children)) +
+  geom_bar(fill='lightblue', color='black') +
+  labs(title='Children counter', x='children') +
+  theme_minimal()
+
+```
+# Children distribution looks interesting. With 0 and 5 as minority and majority of children in a family in our dataset.
+
+
+```{r}
+
+insurance$region <- as.factor(insurance$region)
+
+ggplot(insurance, aes(x=region, fill=region)) +
+  geom_bar(alpha=2.7) +
+  labs(title='Region distribution') +
+  theme_minimal()
+
+
+```
+
+
+```{r}
+# group data by sex.
+
+grouped_insurance_df <- insurance %>%
+  group_by(sex)
+
+summary_statistics <- grouped_insurance_df %>%
+  summarise(
+    min_charges = min(charges),
+    max_charges = max(charges),
+    mean_charges = mean(charges),
+    count_charges = n(),
+    std_charges = sd(charges)
+  )
+
+print(summary_statistics)
+```
