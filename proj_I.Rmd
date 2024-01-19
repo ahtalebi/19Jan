@@ -13,7 +13,7 @@ library(ggplot2)
 ```
 
 ```{r}
-insurance <- read.csv("/home/amir/Documents/3rd_semester/workshop I/project/project_R/insurance.csv", header = TRUE)
+insurance <- read.csv("/home/dvisual/insurance.csv", header = TRUE)
 insurance
 ```
 

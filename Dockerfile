@@ -28,24 +28,24 @@ RUN R -e "install.packages('remotes')"
 
 RUN R -e "remotes::install_github('rstudio/renv@0.16.0')"
 
-RUN mkdir /home/Dvisual
+RUN mkdir /home/dvisual
 
-RUN mkdir /home/Dvisual/pipeline_output
+RUN mkdir /home/dvisual/pipeline_output
 
-RUN mkdir /home/Dvisual/shared_folder
+RUN mkdir /home/dvisual/shared_folder
 
-COPY renv.lock   /home/Dvisual/renv.lock
+COPY renv.lock   /home/dvisual/renv.lock
 
 #COPY functions /home/LinReg/functions
 
-COPY proj_II.Rmd /home/Dvisual/proj_I.Rmd
+COPY proj_I.Rmd /home/dvisual/proj_I.Rmd
 
-COPY insurance.csv /home/Dvisual/insurance.csv
+COPY insurance.csv /home/dvisual/insurance.csv
 
 # COPY _targets.R /home/housing/_targets.R
 
-RUN R -e "setwd('/home/Dvisual');renv::init();renv::restore()"
+RUN R -e "setwd('/home/dvisual');renv::init();renv::restore()"
 
-RUN cd /home/LinReg  && R -e "rmarkdown::render('/home/Dvisual/proj_I.Rmd', output_file = '/home/Dvisual/pipeline_output/proj_I.html')"
+RUN cd /home/dvisual  && R -e "rmarkdown::render('/home/dvisual/proj_I.Rmd', output_file = '/home/dvisual/pipeline_output/proj_I.html')"
 
-CMD mv  /home/Dvisual/pipeline_output/*  /home/Dvisual/shared_folder/
+CMD mv  /home/dvisual/pipeline_output/*  /home/dvisual/shared_folder/
