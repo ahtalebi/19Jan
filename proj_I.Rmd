@@ -14,7 +14,7 @@ library(ggplot2)
 
 ```{r}
 insurance <- read.csv("/home/dvisual/insurance.csv", header = TRUE)
-insurance
+
 ```
 
 ```{r}
@@ -54,7 +54,7 @@ sum(duplicated(insurance))
 ```{r}
 
 insurance <- unique(insurance)
-insurance
+
 ```
 
 ```{r}
