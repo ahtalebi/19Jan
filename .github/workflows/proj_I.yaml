@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build -t my-image-name .
+      run: docker build -t inference_insurance .
     - name: Docker Run Action
       run: docker run --rm --name my_pipeline_container -v /github/workspace/output/:/home/dvisual/shared_folder:rw inference_insurance
     - uses: actions/upload-artifact@v3
