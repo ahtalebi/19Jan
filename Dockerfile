@@ -36,13 +36,9 @@ RUN mkdir /home/dvisual/shared_folder
 
 COPY renv.lock   /home/dvisual/renv.lock
 
-#COPY functions /home/LinReg/functions
-
 COPY proj_I.Rmd /home/dvisual/proj_I.Rmd
 
 COPY insurance.csv /home/dvisual/insurance.csv
-
-# COPY _targets.R /home/housing/_targets.R
 
 RUN R -e "setwd('/home/dvisual');renv::init();renv::restore()"
 
