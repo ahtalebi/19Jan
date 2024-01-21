@@ -1,5 +1,5 @@
 ---
-title: "Workshop I 'Actuarial Science'"
+title: "Inference Insurance'"
 author: "Amir_TALEBI"
 date: "2023-12-10"
 output: html_document
