@@ -17,7 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build -t my-image-name .
     - name: Docker Run Action
-      run: docker run --rm --name my_pipeline_container -v /github/workspace/output/:/home/dvisual/shared_folder:rw my-image-name
+      run: docker run --rm --name my_pipeline_container -v /github/workspace/output/:/home/dvisual/shared_folder:rw inference_insurance
     - uses: actions/upload-artifact@v3
       with:
         name: my-figures
