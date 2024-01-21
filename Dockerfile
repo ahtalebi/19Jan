@@ -1,9 +1,12 @@
 FROM rocker/r-ver:4.1.2
 
 RUN apt-get update && apt-get install -y \
+    libglpk-dev \
+    libxml2-dev \
+    libcairo2-dev \
+    libgit2-dev \
     default-libmysqlclient-dev \
-    libjpeg-dev \
-    libxt-dev \
+    unixodbc-dev \
     wget \
     pandoc
 
